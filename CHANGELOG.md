@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.0.0...1.0.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* schemas are now registred sequentially ([#3](https://github.com/jpramondon/kafka-schema-provisioner/issues/3)) ([08e8ac5](https://github.com/jpramondon/kafka-schema-provisioner/commit/08e8ac57e74cea2510f676be53f7a5e6d8c8a715))
+
 # 1.0.0 (2021-05-12)
 
 

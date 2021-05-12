@@ -1,6 +1,6 @@
 {
   "name": "kafkaschemaprovisioner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple docker image that registers Avro schemas in a Kafka schema registry",
   "main": "index.js",
   "scripts": {
