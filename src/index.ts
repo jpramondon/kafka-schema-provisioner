@@ -6,6 +6,12 @@ import { inspect } from "util";
 import * as _ from "lodash";
 import axios from "axios";
 
+const registryUrl = process.env.SCHEMA_REGISTRY_URL ?? "http://localhost:8081";
+const registryUsername = process.env.SCHEMA_REGISTRY_USERNAME;
+const registryPassword = process.env.SCHEMA_REGISTRY_PASSWORD;
+const schemasLocation = process.env.SCHEMA_LOCATION ?? "/tmp/schemas";
+const configLocation = process.env.CONFIG_LOCATION ?? "/tmp/config";
+
 interface SchemaTopicMapping {
     schema: string;
     topics: string[];
@@ -28,7 +34,7 @@ async function waitForSchemaRegistry(registryUrl: string, max: number = 10000): 
                 if (Date.now() - start > max) {
                     return Promise.reject()
                 }
-                console.debug("Waiting on registry to start");
+                console.debug(`Waiting on registry to start at ${registryUrl}`);
                 await new Promise(r => setTimeout(r, 2000));
                 return false;
             });
@@ -76,12 +82,6 @@ function registerSchema(schemaPath: string, subject: string): Promise<void> {
         });
 }
 
-const registryUrl = process.env.SCHEMA_REGISTRY_URL ?? "http://localhost:8081";
-const registryUsername = process.env.SCHEMA_REGISTRY_USERNAME;
-const registryPassword = process.env.SCHEMA_REGISTRY_PASSWORD;
-const schemasLocation = process.env.SCHEMA_LOCATION ?? "/tmp/schemas";
-const configLocation = process.env.CONFIG_LOCATION ?? "/tmp/config";
-
 const config = readConf(configLocation);
 const schemaFiles = findSchemaFiles(schemasLocation);
 const schemaSubjectMappings = toSchemaSubjectMapping(config, schemaFiles);
@@ -90,20 +90,23 @@ console.debug(`Current schema path: ${schemaFiles}`);
 console.debug(`Current config: ${inspect(config)}`);
 console.debug(`Schema/subject mappings: ${inspect(schemaSubjectMappings)}`);
 
-let schemaProvisioner;
+let schemaProvisioner: KafkaSchemaProvisioner;
 
 waitForSchemaRegistry(registryUrl)
     .then(() => {
+        let returnCode = 0;
         schemaProvisioner = new KafkaSchemaProvisioner(registryUrl, registryUsername, registryPassword);
-        return schemaSubjectMappings.map(mapping => registerSchema(`${path.join(schemasLocation, mapping.schemaFile)}`, mapping.subject));
-    })
-    .then(futures => Promise.all(futures)
-        .then(() => {
-            console.log(`Finished registering all schemas`);
-            process.exit(0);
-        })
-        .catch(err => {
-            console.error(err.message);
-            process.exit(1);
-        })
-    );
+        schemaSubjectMappings.reduce<Promise<void>>((previousPromise, nextMapping) => {
+            return previousPromise.then(() => {
+                return registerSchema(`${path.join(schemasLocation, nextMapping.schemaFile)}`, nextMapping.subject)
+                    .catch(err => {
+                        console.error(err.message);
+                        returnCode = 1;
+                    });
+            });
+        }, Promise.resolve())
+            .then(() => {
+                console.log(`Finished registering all schemas`);
+                process.exit(returnCode);
+            });
+    });
