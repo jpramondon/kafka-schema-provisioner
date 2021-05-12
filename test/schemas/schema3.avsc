@@ -1,0 +1,100 @@
+{
+    "namespace": "seller.sync.salesforce.lead",
+    "name": "salesforceLead",
+    "type": "record",
+    "fields": [
+        {
+            "name": "bu",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "BU associated to the lead"
+        },
+        {
+            "name": "company",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "The name of the company"
+        },
+        {
+            "name": "country",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Country of Llead"
+        },
+        {
+            "name": "createdDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Date where lead have been created in Salesforce"
+        },
+        {
+            "name": "disqualifiedMotive",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Motive of lead disqualification"
+        },
+        {
+            "name": "lastActivityDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Last date where activity has been detected in Salesforce"
+        },
+        {
+            "name": "lastModifiedDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Last date where lead have been modified in Salesforce"
+        },
+        {
+            "name": "leadSource",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Origin of lead detection"
+        },
+        {
+            "name": "mainDepartment",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Department where lead is mainly associated in Salesforce"
+        },
+        {
+            "name": "name",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Name of the lead in Salesforce"
+        },
+        {
+            "name": "priority",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Priority of lead driving in Salesforce"
+        },
+        {
+            "name": "rating",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Lead rating in Salesforce"
+        },
+        {
+            "name": "secondaryDepartment",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Secondary department"
+        },
+        {
+            "name": "status",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Workflow status of lead in Salesforce"
+        }
+    ]
+}

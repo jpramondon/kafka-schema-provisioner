@@ -1,0 +1,22 @@
+[
+    {
+        "schema":"schema1",
+        "topics": ["topic1", "topic2"]
+    },
+    {
+        "schema":"schema2",
+        "topics": ["topic1"]
+    },
+    {
+        "schema":"schema3",
+        "topics": ["topic1", "topic5"]
+    },
+    {
+        "schema":"schema3",
+        "topics": []
+    },
+    {
+        "schema":"schema4",
+        "topics": []
+    }
+]

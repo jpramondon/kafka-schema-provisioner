@@ -1,0 +1,134 @@
+{
+    "namespace": "seller.sync.salesforce.account",
+    "name": "salesforceAccount",
+    "type": "record",
+    "fields": [
+        {
+            "name": "accountId",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Salesforce account ID"
+        },
+        {
+            "name": "accountName",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Salesforce account name"
+        },
+        {
+            "name": "accountSource",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Origin of account detection"
+        },
+        {
+            "name": "accountOwnerId",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Salesforce owner ID account"
+        },
+        {
+            "name": "bu",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "BU associated to the account"
+        },
+        {
+            "name": "country",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Country of account"
+        },
+        {
+            "name": "createdBy",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Salesforce ID of account creator"
+        },
+        {
+            "name": "createdDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Date where account have been created in Salesforce"
+        },
+        
+        {
+            "name": "integrationType",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Salesforce integration type"
+        },
+        {
+            "name": "lastActivityDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Last date where activity has been detected in Salesforce"
+        },
+        {
+            "name": "lastModifiedDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Last date where account has been modified in Salesforce"
+        },
+        {
+            "name": "mainDepartment",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Department where account is mainly associated in Salesforce"
+        },
+        {
+            "name": "miraklShopId",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Mirakl ID of the account"
+        },
+        {
+            "name": "numberOfSkus",
+            "type": ["null","long"],
+            "default": null,
+            "doc": "Number of skus of account"
+        },
+        {
+            "name": "priority",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Priority of lead driving in Salesforce"
+        },
+        {
+            "name": "shippingCountry",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Shipping country of account"
+        },
+        {
+            "name": "status",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Workflow status of lead in Salesforce"
+        },
+        {
+            "name": "tags",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Account tags in Salesforce"
+        },
+        {
+            "name": "type",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Account type in Salesforce"
+        }
+    ]
+}

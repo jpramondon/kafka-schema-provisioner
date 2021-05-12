@@ -1,0 +1,10 @@
+[
+    {
+        "schema":"schema1",
+        "topics": ["topic1", "topic2"]
+    },
+    {
+        "schema":"schema1",
+        "topics": ["topic1", "topic2"]
+    }
+]

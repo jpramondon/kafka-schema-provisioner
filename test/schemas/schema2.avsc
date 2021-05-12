@@ -1,0 +1,98 @@
+{
+    "namespace": "seller.sync.salesforce.opportunity",
+    "name": "salesforceOpportunity",
+    "type": "record",
+    "fields": [
+        {
+            "name": "accountName",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Name of the opportunity identified in Salesforce"
+        },
+        {
+            "name": "closeDate",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Date where opportunity has been closed in Salesforce"
+        },
+        {
+            "name": "createdDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Date where opportunity have been created in Salesforce"
+        },
+        {
+            "name": "lastModifiedDate",
+            "type": ["null",{
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }],
+            "default": null,
+            "doc": "Last date where opportunity have been modified in Salesforce"
+        },
+        {
+            "name": "launchCallDetails",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Details of information exchange on Opportunity"
+        },
+        {
+            "name": "launchCallDone",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Flag if the information exchange with opportunity has been done"
+        },
+        {
+            "name": "leadSource",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Origin of opportunity detection"
+        },
+        {
+            "name": "lossReason",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Reason of opportunity loss"
+        },
+        {
+            "name": "nextStep",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Next step required for transforming opportunity"
+        },
+        {
+            "name": "opportunityName",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Opportunity name in Salesforce"
+        },
+        {
+            "name": "opportunityOwnerId",
+            "type": ["null","string"],
+            "default": null,
+            "doc": "Salesforce ID of the opportunity owner"
+        },
+        {
+            "name": "probability",
+            "type": ["null", "long"],
+            "default": null,
+            "doc": "Opportunity success  probability"
+        },
+        {
+            "name": "stageName",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Status name of the opportunity in Salesforce"
+        },
+        {
+            "name": "type",
+            "type": ["null", "string"],
+            "default": null,
+            "doc": "Entity target of the opportunity"
+        }
+
+    ]
+}
