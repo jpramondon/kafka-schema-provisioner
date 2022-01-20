@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.1.0...1.1.1) (2022-01-20)
+
+
+### Bug Fixes
+
+* strict mode requires additional variable checks ([#5](https://github.com/jpramondon/kafka-schema-provisioner/issues/5)) ([917abb4](https://github.com/jpramondon/kafka-schema-provisioner/commit/917abb4cc0ba78d3ce73e7ce4fca479714414deb))
+
 # [1.1.0](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.0.1...1.1.0) (2022-01-20)
 
 
