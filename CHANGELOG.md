@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.0.1...1.1.0) (2022-01-20)
+
+
+### Features
+
+* configurable wait time and retry delay ([#4](https://github.com/jpramondon/kafka-schema-provisioner/issues/4)) ([cb1ec0f](https://github.com/jpramondon/kafka-schema-provisioner/commit/cb1ec0f9d966b813ff0633b41aae8088e926fc5b))
+
 ## [1.0.1](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.0.0...1.0.1) (2021-05-12)
 
 
