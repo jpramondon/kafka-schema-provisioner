@@ -11,6 +11,8 @@ const registryUsername = process.env.SCHEMA_REGISTRY_USERNAME;
 const registryPassword = process.env.SCHEMA_REGISTRY_PASSWORD;
 const schemasLocation = process.env.SCHEMA_LOCATION ?? "/tmp/schemas";
 const configLocation = process.env.CONFIG_LOCATION ?? "/tmp/config";
+const registryRetryDelay = parseInt(process.env.SCHEMA_REGISTRY_RETRY_DELAY ?? "2000");
+const registryMaxWaitTime = parseInt(process.env.SCHEMA_REGISTRY_MAX_WAIT_TIME ?? "10000");
 
 interface SchemaTopicMapping {
     schema: string;
@@ -22,7 +24,7 @@ interface SchemaSubjectMapping {
     subject: string;
 }
 
-async function waitForSchemaRegistry(registryUrl: string, max: number = 10000): Promise<void> {
+async function waitForSchemaRegistry(registryUrl: string, maxWaitTime: number = registryMaxWaitTime, retryDelay: number = registryRetryDelay): Promise<void> {
     let start = Date.now();
     let stop = false;
     while (!stop) {
@@ -31,11 +33,11 @@ async function waitForSchemaRegistry(registryUrl: string, max: number = 10000): 
                 return true;
             })
             .catch(async err => {
-                if (Date.now() - start > max) {
+                if (Date.now() - start > maxWaitTime) {
                     return Promise.reject()
                 }
                 console.debug(`Waiting on registry to start at ${registryUrl}`);
-                await new Promise(r => setTimeout(r, 2000));
+                await new Promise(r => setTimeout(r, retryDelay));
                 return false;
             });
     }
