@@ -4,12 +4,12 @@ import * as _ from "lodash";
 
 export class KafkaSchemaProvisioner {
 
-    public registry: SchemaRegistry;
+    public registry!: SchemaRegistry;
 
     constructor(registryUrl: string, registryUsername?: string, registryPassword?: string) {
         if (registryUrl && !_.isEmpty(registryUrl)) {
             const registryConf: SchemaRegistryAPIClientArgs = { host: registryUrl };
-            if (registryUsername) {
+            if (registryUsername && registryPassword) {
                 registryConf.auth = {
                     username: registryUsername,
                     password: registryPassword
