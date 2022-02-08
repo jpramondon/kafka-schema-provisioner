@@ -36,7 +36,7 @@ async function waitForSchemaRegistry(registryUrl: string, maxWaitTime: number = 
                 if (Date.now() - start > maxWaitTime) {
                     return Promise.reject()
                 }
-                console.debug(`Waiting on registry to start at ${registryUrl}`);
+                console.debug(`${new Date().toISOString()} - Waiting on registry to start at ${registryUrl}`);
                 await new Promise(r => setTimeout(r, retryDelay));
                 return false;
             });
@@ -45,7 +45,7 @@ async function waitForSchemaRegistry(registryUrl: string, maxWaitTime: number = 
 
 function findSchemaFiles(schemasLocation: string): string[] {
     if (!fs.existsSync(schemasLocation)) {
-        console.error(`Folder containing schemas not found (${schemasLocation}).`);
+        console.error(`${new Date().toISOString()} - Folder containing schemas not found (${schemasLocation}).`);
         process.exit(1);
     }
     return fs.readdirSync(schemasLocation);
@@ -54,7 +54,7 @@ function findSchemaFiles(schemasLocation: string): string[] {
 function readConf(configLocation: string): SchemaTopicMapping[] {
     const fullConfigPath = path.join(configLocation, "config.json");
     if (!fs.existsSync(fullConfigPath)) {
-        console.error(`Configuration file ${fullConfigPath} not found.`);
+        console.error(`${new Date().toISOString()} - Configuration file ${fullConfigPath} not found.`);
         process.exit(1);
     }
     return JSON.parse(fs.readFileSync(fullConfigPath).toString("utf8")) as SchemaTopicMapping[];
@@ -77,7 +77,7 @@ function registerSchema(schemaPath: string, subject: string): Promise<void> {
     const schema = fs.readFileSync(schemaPath).toString("utf8");
     return schemaProvisioner.registry.register(JSON.parse(schema) as RawAvroSchema, { subject })
         .then(regSchema => {
-            console.debug(`Schema ${path.basename(schemaPath)} now registered with id ${regSchema.id} with subject ${subject}`);
+            console.debug(`${new Date().toISOString()} - Schema ${path.basename(schemaPath)} now registered with id ${regSchema.id} with subject ${subject}`);
         })
         .catch(err => {
             throw new Error(`Unable to register schema ${path.basename(schemaPath)} with subject ${subject}. Got following error: ${JSON.stringify(err)}`);
@@ -87,10 +87,10 @@ function registerSchema(schemaPath: string, subject: string): Promise<void> {
 const config = readConf(configLocation);
 const schemaFiles = findSchemaFiles(schemasLocation);
 const schemaSubjectMappings = toSchemaSubjectMapping(config, schemaFiles);
-console.debug(`Got a list of ${schemaFiles.length} schemas to provision in the registry`);
-console.debug(`Current schema path: ${schemaFiles}`);
-console.debug(`Current config: ${inspect(config)}`);
-console.debug(`Schema/subject mappings: ${inspect(schemaSubjectMappings)}`);
+console.debug(`${new Date().toISOString()} - Got a list of ${schemaFiles.length} schemas to provision in the registry`);
+console.debug(`${new Date().toISOString()} - Current schema path: ${schemaFiles}`);
+console.debug(`${new Date().toISOString()} - Current config: ${inspect(config)}`);
+console.debug(`${new Date().toISOString()} - Schema/subject mappings: ${inspect(schemaSubjectMappings)}`);
 
 let schemaProvisioner: KafkaSchemaProvisioner;
 
@@ -102,13 +102,16 @@ waitForSchemaRegistry(registryUrl)
             return previousPromise.then(() => {
                 return registerSchema(`${path.join(schemasLocation, nextMapping.schemaFile)}`, nextMapping.subject)
                     .catch(err => {
-                        console.error(err.message);
+                        console.error(`${new Date().toISOString()} - ${err.message}`);
                         returnCode = 1;
                     });
             });
         }, Promise.resolve())
             .then(() => {
-                console.log(`Finished registering all schemas`);
+                console.log(`${new Date().toISOString()} - Finished registering all schemas`);
                 process.exit(returnCode);
             });
+    })
+    .catch(err => {
+        console.error(`${new Date().toISOString()} - Error while waiting for registry: ${inspect(err)}`);
     });
