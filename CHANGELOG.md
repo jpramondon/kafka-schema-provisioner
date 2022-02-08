@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.1.1...1.2.0) (2022-02-08)
+
+
+### Features
+
+* added dates to logging messages and also a global catch ([#6](https://github.com/jpramondon/kafka-schema-provisioner/issues/6)) ([977a100](https://github.com/jpramondon/kafka-schema-provisioner/commit/977a100cf9d70bb50474f488a7726c8ee36ffe9f))
+
 ## [1.1.1](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.1.0...1.1.1) (2022-01-20)
 
 
