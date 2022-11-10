@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.2.0...1.2.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* filter down to avsc files only ([#7](https://github.com/jpramondon/kafka-schema-provisioner/issues/7)) ([b95ca43](https://github.com/jpramondon/kafka-schema-provisioner/commit/b95ca43819e05cf0e463e34cadcf936a189cb402))
+
 # [1.2.0](https://github.com/jpramondon/kafka-schema-provisioner/compare/1.1.1...1.2.0) (2022-02-08)
 
 
